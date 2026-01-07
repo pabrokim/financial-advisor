@@ -49,7 +49,7 @@ body {
     text-align: center;
     margin-bottom: 30px;
     padding: 20px 15px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
@@ -183,105 +183,14 @@ body {
     width: 100%;
 }
 
-.page-title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 15px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
 
-.title-highlight {
-    background: linear-gradient(90deg, #FFD700, #34a853, #2c8cff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-size: 2.2rem;
-    margin-bottom: 5px;
-    line-height: 1.2;
-    text-align: center;
-}
-
-.title-sub {
-    font-size: 1rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 5px;
-    line-height: 1.4;
-}
-
-.header-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 20px 0;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-md);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-}
-
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    flex: 1;
-    min-width: 80px;
-}
-
-.stat-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #FFD700;
-    line-height: 1.2;
-}
-
-.stat-label {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.8);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
-    line-height: 1.2;
-}
-
-.stat-divider {
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 1.2rem;
-    display: none;
-}
-
-.page-subtitle {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 100%;
-    margin: 0 auto 25px;
-    padding: 0 10px;
-    text-align: center;
-}
-
-.page-subtitle i {
-    color: #FFD700;
-    margin-right: 8px;
-}
 
 .header-features {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 80px;
     width: 100%;
 }
 
