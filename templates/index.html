@@ -1,111 +1,221 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Kenya Investment Comparator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Finance Comparator</title>
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Kenya Investment Comparator 🔥</h1>
-    <form method="POST">
-        <label>Amount to Invest (KES):</label>
-        <input type="number" name="amount" required placeholder="100,000">
+    <div class="container">
+        <header>
+            <h1>🇰🇪 Kenya Finance Comparator</h1>
+            <p class="subtitle">Compare returns across Kenyan investment options</p>
+        </header>
 
-        <label>Investment Horizon (Years):</label>
-        <input type="number" step="0.1" name="horizon" required placeholder="1, 2, 5, etc.">
+        <main>
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Investment Calculator</h2>
+                    <div class="input-group">
+                        <label for="principal">Initial Investment (KES)</label>
+                        <input type="number" id="principal" value="100000" min="1000" step="1000">
+                    </div>
+                    <div class="input-group">
+                        <label for="years">Investment Period: <span id="years-display">5</span> years</label>
+                        <input type="range" id="years" min="1" max="30" value="5" class="slider">
+                    </div>
+                    <button onclick="calculateReturns()" class="calculate-btn">Calculate Returns</button>
+                </div>
+            </section>
 
-        <label>Risk Preference:</label>
-        <select name="risk">
-            <option>All</option>
-            <option>Very Low</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>Medium-High</option>
-            <option>High</option>
-            <option>Very High</option>
-        </select>
+            <section class="results-section">
+                <div class="chart-container">
+                    <canvas id="returnsChart"></canvas>
+                </div>
+                
+                <div class="results-table">
+                    <h2>Comparison Results</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Investment Option</th>
+                                <th>Rate (%)</th>
+                                <th>Final Amount</th>
+                                <th>Returns</th>
+                                <th>ROI</th>
+                                <th>Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            <!-- Results will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-        <button type="submit">Compare Options</button>
-    </form>
+            <section class="assets-section">
+                <h2>Available Investment Options</h2>
+                <div class="assets-grid" id="assets-grid">
+                    <!-- Assets will be loaded here -->
+                </div>
+            </section>
+        </main>
 
-    {% if results %}
-        <form method="POST" action="/export">
-            <input type="hidden" name="amount" value="{{ amount }}">
-            <input type="hidden" name="horizon" value="{{ horizon }}">
-            <input type="hidden" name="risk" value="{{ request.form.get('risk','All') }}">
-            <button type="submit" class="export-btn">Export CSV</button>
-        </form>
+        <footer>
+            <p>Note: Rates are indicative and subject to change. Past performance is not indicative of future results.</p>
+        </footer>
+    </div>
 
-        <table>
-            <tr>
-                <th>Asset</th>
-                <th>Category</th>
-                <th>Gross Return (KES)</th>
-                <th>Net Return (KES)</th>
-                <th>Risk</th>
-                <th>Liquidity</th>
-                <th>Liquidity Warning</th>
-                <th>Description</th>
-            </tr>
-            {% for r in results %}
-            <tr>
-                <td>{{ r.name }}</td>
-                <td>{{ r.category }}</td>
-                <td>{{ r.gross_return }}</td>
-                <td>{{ r.net_return }}</td>
-                <td class="{{ r.risk.replace(' ', '-') }}">{{ r.risk }}</td>
-                <td>{{ r.liquidity }}</td>
-                <td class="liquidity-warning">{{ r.liquidity_warning }}</td>
-                <td>{{ r.description }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <!-- Bar chart -->
-        <h2 style="margin-top: 30px;">Projected Net Returns</h2>
-        <canvas id="returnChart" style="max-width:100%;height:300px;"></canvas>
-
-        <script>
-            const ctx = document.getElementById('returnChart').getContext('2d');
-            const labels = [{% for r in results %}'{{ r.name }}',{% endfor %}];
-            const data = [{% for r in results %}{{ r.net_return }},{% endfor %}];
-            const backgroundColors = [{% for r in results %}
-                {% if r.risk == 'Very Low' %}'#2ecc71'{% elif r.risk == 'Low' %}'#27ae60'
-                {% elif r.risk == 'Medium' or r.risk == 'Medium-High' %}'#e67e22'
-                {% elif r.risk == 'High' or r.risk == 'Very High' %}'#e74c3c'
-                {% else %}'#3498db'{% endif %},
-            {% endfor %}];
-
-            new Chart(ctx, {
+    <script>
+        let chart = null;
+        
+        // Load assets on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAssets();
+            calculateReturns();
+        });
+        
+        // Update years display
+        document.getElementById('years').addEventListener('input', function() {
+            document.getElementById('years-display').textContent = this.value;
+        });
+        
+        async function loadAssets() {
+            try {
+                const response = await fetch('/api/assets');
+                const assets = await response.json();
+                displayAssets(assets);
+            } catch (error) {
+                console.error('Error loading assets:', error);
+            }
+        }
+        
+        function displayAssets(assets) {
+            const grid = document.getElementById('assets-grid');
+            grid.innerHTML = assets.map(asset => `
+                <div class="asset-card">
+                    <div class="asset-header">
+                        <h3>${asset.name}</h3>
+                        <span class="rate-badge">${asset.rate}%</span>
+                    </div>
+                    <div class="asset-details">
+                        <p><strong>Risk:</strong> <span class="risk-${asset.risk.toLowerCase()}">${asset.risk}</span></p>
+                        <p><strong>Liquidity:</strong> ${asset.liquidity}</p>
+                        <p><strong>Min Investment:</strong> KES ${asset.min_investment.toLocaleString()}</p>
+                        <p class="description">${asset.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        async function calculateReturns() {
+            const principal = document.getElementById('principal').value;
+            const years = document.getElementById('years').value;
+            
+            try {
+                const response = await fetch('/api/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        principal: parseFloat(principal),
+                        years: parseInt(years)
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const results = await response.json();
+                displayResults(results);
+                updateChart(results);
+                
+            } catch (error) {
+                console.error('Error calculating returns:', error);
+                alert('Error calculating returns. Please try again.');
+            }
+        }
+        
+        function displayResults(results) {
+            const tbody = document.getElementById('results-body');
+            tbody.innerHTML = results.map(result => `
+                <tr>
+                    <td><strong>${result.name}</strong></td>
+                    <td>${result.rate}%</td>
+                    <td>KES ${result.final_amount.toLocaleString()}</td>
+                    <td>KES ${result.returns.toLocaleString()}</td>
+                    <td>${result.roi.toFixed(1)}%</td>
+                    <td><span class="risk-badge risk-${result.risk.toLowerCase()}">${result.risk}</span></td>
+                </tr>
+            `).join('');
+        }
+        
+        function updateChart(results) {
+            const ctx = document.getElementById('returnsChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            // Sort results by final amount
+            results.sort((a, b) => b.final_amount - a.final_amount);
+            
+            chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: results.map(r => r.name),
                     datasets: [{
-                        label: 'Projected Net Return (KES)',
-                        data: data,
-                        backgroundColor: backgroundColors,
-                        borderColor: '#34495e',
+                        label: 'Final Amount (KES)',
+                        data: results.map(r => r.final_amount),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)',
+                            'rgba(201, 203, 207, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 206, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)',
+                            'rgb(255, 159, 64)',
+                            'rgb(201, 203, 207)'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
-                        legend: { display: false },
-                        tooltip: { mode: 'index', intersect: false }
+                        title: {
+                            display: true,
+                            text: 'Investment Returns Comparison'
+                        },
+                        legend: {
+                            display: false
+                        }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: { display: true, text: 'KES' }
-                        },
-                        x: {
-                            title: { display: true, text: 'Assets' }
+                            ticks: {
+                                callback: function(value) {
+                                    return 'KES ' + value.toLocaleString();
+                                }
+                            }
                         }
                     }
                 }
             });
-        </script>
-    {% endif %}
+        }
+    </script>
 </body>
 </html>

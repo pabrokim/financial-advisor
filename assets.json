@@ -1,101 +1,65 @@
 [
   {
+    "name": "SACCO Dividends",
+    "type": "sacco",
+    "rate": 12.5,
+    "risk": "Medium",
+    "liquidity": "Medium",
+    "min_investment": 1000,
+    "description": "Cooperative society dividends with annual payout"
+  },
+  {
     "name": "Money Market Fund",
-    "category": "Cash-like",
-    "expected_return": 0.10,
+    "type": "mmf",
+    "rate": 9.8,
     "risk": "Low",
     "liquidity": "High",
-    "tax": 0.10,
-    "fees": 0.005,
-    "liquidity_warning": "",
-    "description": "Pooled fund investing in short-term debt"
-  },
-  {
-    "name": "Treasury Bill",
-    "category": "Debt",
-    "expected_return": 0.14,
-    "risk": "Very Low",
-    "liquidity": "Medium",
-    "tax": 0.15,
-    "fees": 0.001,
-    "liquidity_warning": "",
-    "description": "Short-term government debt"
-  },
-  {
-    "name": "Treasury Bond",
-    "category": "Debt",
-    "expected_return": 0.15,
-    "risk": "Very Low",
-    "liquidity": "Medium",
-    "tax": 0.15,
-    "fees": 0.001,
-    "liquidity_warning": "",
-    "description": "Long-term government debt"
-  },
-  {
-    "name": "SACCO Deposit",
-    "category": "Debt",
-    "expected_return": 0.12,
-    "risk": "Low",
-    "liquidity": "Medium",
-    "tax": 0.10,
-    "fees": 0.002,
-    "liquidity_warning": "Requires 1 year lock-in",
-    "description": "SACCO fixed-term deposit with interest"
+    "min_investment": 500,
+    "description": "Low-risk mutual funds with daily liquidity"
   },
   {
     "name": "Bank Fixed Deposit",
-    "category": "Debt",
-    "expected_return": 0.08,
+    "type": "bank_interest",
+    "rate": 7.5,
     "risk": "Low",
     "liquidity": "Low",
-    "tax": 0.10,
-    "fees": 0.002,
-    "liquidity_warning": "Locked for term",
-    "description": "Fixed-term bank deposit"
+    "min_investment": 5000,
+    "description": "Fixed-term bank deposits"
   },
   {
-    "name": "Stocks / Equities",
-    "category": "Equity",
-    "expected_return": 0.20,
-    "risk": "High",
-    "liquidity": "High",
-    "tax": 0.15,
-    "fees": 0.01,
-    "liquidity_warning": "",
-    "description": "Ownership in companies, volatile but high potential"
-  },
-  {
-    "name": "REIT",
-    "category": "Equity",
-    "expected_return": 0.12,
-    "risk": "Medium",
+    "name": "91-Day Treasury Bill",
+    "type": "treasury_bills",
+    "rate": 16.2,
+    "risk": "Low",
     "liquidity": "Medium",
-    "tax": 0.10,
-    "fees": 0.005,
-    "liquidity_warning": "",
-    "description": "Real estate investment trust"
+    "min_investment": 100000,
+    "description": "Government short-term securities"
   },
   {
-    "name": "Property",
-    "category": "Real Estate",
-    "expected_return": 0.18,
-    "risk": "Medium-High",
+    "name": "Infrastructure Bond",
+    "type": "bonds",
+    "rate": 14.5,
+    "risk": "Low",
     "liquidity": "Low",
-    "tax": 0.10,
-    "fees": 0.01,
-    "liquidity_warning": "Illiquid, requires management",
-    "description": "Direct real estate investment"
+    "min_investment": 100000,
+    "description": "Government infrastructure bonds"
   },
   {
-    "name": "Cryptocurrency",
-    "category": "Alternative",
-    "expected_return": 0.50,
-    "risk": "Very High",
-    "liquidity": "High",
-    "tax": 0.15,
-    "fees": 0.01,
-    "liquidity_warning": "High volatility",
-    "description": "Digital assets like Bitcoin or Ethereum"
+    "name": "Rental Property (Nairobi)",
+    "type": "rental",
+    "rate": 8.0,
+    "risk": "Medium",
+    "liquidity": "Low",
+    "min_investment": 3000000,
+    "description": "Residential property rental yield"
+  },
+  {
+    "name": "Land Appreciation",
+    "type": "land",
+    "rate": 15.0,
+    "risk": "Medium",
+    "liquidity": "Low",
+    "min_investment": 500000,
+    "description": "Land value appreciation in developing areas"
   }
 ]
