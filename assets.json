@@ -1,0 +1,101 @@
+[
+  {
+    "name": "Money Market Fund",
+    "category": "Cash-like",
+    "expected_return": 0.10,
+    "risk": "Low",
+    "liquidity": "High",
+    "tax": 0.10,
+    "fees": 0.005,
+    "liquidity_warning": "",
+    "description": "Pooled fund investing in short-term debt"
+  },
+  {
+    "name": "Treasury Bill",
+    "category": "Debt",
+    "expected_return": 0.14,
+    "risk": "Very Low",
+    "liquidity": "Medium",
+    "tax": 0.15,
+    "fees": 0.001,
+    "liquidity_warning": "",
+    "description": "Short-term government debt"
+  },
+  {
+    "name": "Treasury Bond",
+    "category": "Debt",
+    "expected_return": 0.15,
+    "risk": "Very Low",
+    "liquidity": "Medium",
+    "tax": 0.15,
+    "fees": 0.001,
+    "liquidity_warning": "",
+    "description": "Long-term government debt"
+  },
+  {
+    "name": "SACCO Deposit",
+    "category": "Debt",
+    "expected_return": 0.12,
+    "risk": "Low",
+    "liquidity": "Medium",
+    "tax": 0.10,
+    "fees": 0.002,
+    "liquidity_warning": "Requires 1 year lock-in",
+    "description": "SACCO fixed-term deposit with interest"
+  },
+  {
+    "name": "Bank Fixed Deposit",
+    "category": "Debt",
+    "expected_return": 0.08,
+    "risk": "Low",
+    "liquidity": "Low",
+    "tax": 0.10,
+    "fees": 0.002,
+    "liquidity_warning": "Locked for term",
+    "description": "Fixed-term bank deposit"
+  },
+  {
+    "name": "Stocks / Equities",
+    "category": "Equity",
+    "expected_return": 0.20,
+    "risk": "High",
+    "liquidity": "High",
+    "tax": 0.15,
+    "fees": 0.01,
+    "liquidity_warning": "",
+    "description": "Ownership in companies, volatile but high potential"
+  },
+  {
+    "name": "REIT",
+    "category": "Equity",
+    "expected_return": 0.12,
+    "risk": "Medium",
+    "liquidity": "Medium",
+    "tax": 0.10,
+    "fees": 0.005,
+    "liquidity_warning": "",
+    "description": "Real estate investment trust"
+  },
+  {
+    "name": "Property",
+    "category": "Real Estate",
+    "expected_return": 0.18,
+    "risk": "Medium-High",
+    "liquidity": "Low",
+    "tax": 0.10,
+    "fees": 0.01,
+    "liquidity_warning": "Illiquid, requires management",
+    "description": "Direct real estate investment"
+  },
+  {
+    "name": "Cryptocurrency",
+    "category": "Alternative",
+    "expected_return": 0.50,
+    "risk": "Very High",
+    "liquidity": "High",
+    "tax": 0.15,
+    "fees": 0.01,
+    "liquidity_warning": "High volatility",
+    "description": "Digital assets like Bitcoin or Ethereum"
+  }
+]

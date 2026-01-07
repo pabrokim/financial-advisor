@@ -1,0 +1,14 @@
+body { font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 900px; margin: auto; padding: 20px; background: #f5f7fa; color: #333; }
+h1 { text-align: center; color: #1a73e8; margin-bottom: 20px; }
+input, select, button { padding: 10px; margin: 5px 0; width: 100%; border-radius: 5px; border: 1px solid #ccc; }
+button { background-color: #1a73e8; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+button:hover { background-color: #155ab6; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+th { background-color: #f0f4f8; }
+.Low, .Very-Low { color: green; font-weight: bold; }
+.Medium, .Medium-High { color: orange; font-weight: bold; }
+.High, .Very-High { color: red; font-weight: bold; }
+.liquidity-warning { font-style: italic; color: #e67e22; }
+#returnChart { background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-top: 20px; }
+.export-btn { margin-top: 10px; }
