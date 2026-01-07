@@ -2,86 +2,264 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenya Finance Comparator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PesaCompare.ke | Kenya's Smart Investment Assistant</title>
+    <meta name="description" content="Compare investment returns across Kenyan SACCO dividends, MMF, treasury bills, bonds, rental property, and land appreciation. Make informed pesa decisions.">
+    <meta name="keywords" content="Kenya investment, SACCO dividends, Treasury bills, MMF, bonds, real estate, compare returns, financial calculator">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>₿</text></svg>">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🇰🇪 Kenya Finance Comparator</h1>
-            <p class="subtitle">Compare returns across Kenyan investment options</p>
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-top">
+                <div class="logo-container">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <div class="logo-circle">
+                                <span class="logo-symbol">₿</span>
+                            </div>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-primary">Pesa</span>
+                            <span class="logo-secondary">Compare</span>
+                            <span class="logo-ke">.ke</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-tagline">
+                    <div class="tagline-badge">
+                        <i class="fas fa-leaf"></i> Kenya's Smart Investment Assistant
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-main">
+                <h1 class="page-title">
+                    <span class="title-highlight">PesaCompare</span>
+                    <span class="title-sub">Kenya's Investment Intelligence Platform</span>
+                </h1>
+                
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Investment Types</span>
+                    </div>
+                    <div class="stat-divider">•</div>
+                    <div class="stat-item">
+                        <span class="stat-number">Smart</span>
+                        <span class="stat-label">Comparison</span>
+                    </div>
+                    <div class="stat-divider">•</div>
+                    <div class="stat-item">
+                        <span class="stat-number">Instant</span>
+                        <span class="stat-label">Calculations</span>
+                    </div>
+                </div>
+                
+                <p class="page-subtitle">
+                    <i class="fas fa-map-marker-alt"></i> Built for Kenya's unique financial landscape.
+                    Compare SACCO dividends, Treasury Bills, Infrastructure Bonds, 
+                    and real estate investments. Make <strong>informed <em>pesa</em> decisions</strong>.
+                </p>
+                
+                <div class="header-features">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Central Bank Rates</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Live Comparisons</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile Friendly</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-handshake"></i>
+                        <span>Free to Use</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-bottom">
+                <div class="kenya-theme">
+                    <div class="theme-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="theme-text">
+                        <strong>PESA NA MAFANIKIO</strong> – Your Money, Your Future
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <section class="calculator-section">
-                <div class="calculator-card">
-                    <h2>Investment Calculator</h2>
-                    <div class="input-group">
-                        <label for="principal">Initial Investment (KES)</label>
-                        <input type="number" id="principal" value="100000" min="1000" step="1000">
-                    </div>
-                    <div class="input-group">
-                        <label for="years">Investment Period: <span id="years-display">5</span> years</label>
-                        <input type="range" id="years" min="1" max="30" value="5" class="slider">
-                    </div>
-                    <button onclick="calculateReturns()" class="calculate-btn">Calculate Returns</button>
+        <!-- Main Calculator Section -->
+        <section class="calculator-section">
+            <!-- Input Card -->
+            <div class="calculator-card">
+                <div class="calculator-header">
+                    <h2><i class="fas fa-calculator"></i> Investment Calculator</h2>
                 </div>
-            </section>
+                
+                <div class="input-group">
+                    <label class="input-label">Initial Investment Amount</label>
+                    <div class="input-with-currency">
+                        <input 
+                            type="number" 
+                            id="principal" 
+                            class="input-field" 
+                            value="100000" 
+                            min="1000" 
+                            step="1000"
+                            placeholder="Enter amount"
+                        >
+                    </div>
+                    <div class="range-labels">
+                        <span>Kshs 1,000</span>
+                        <span>Kshs 10M+</span>
+                    </div>
+                </div>
 
-            <section class="results-section">
+                <div class="input-group">
+                    <label class="input-label">Investment Period: <span id="years-display">5 years</span></label>
+                    <input 
+                        type="range" 
+                        id="years" 
+                        class="range-slider" 
+                        min="1" 
+                        max="20" 
+                        value="5"
+                    >
+                    <div class="range-labels">
+                        <span>1 Year</span>
+                        <span>10 Years</span>
+                        <span>20 Years</span>
+                    </div>
+                </div>
+
+                <button onclick="calculateReturns()" class="calculate-btn">
+                    <i class="fas fa-chart-line"></i> Calculate Investment Returns
+                </button>
+
+                <div class="info-box">
+                    <h3>How it works</h3>
+                    <p>Enter your initial investment amount and select the investment period. 
+                    The calculator uses compound interest formulas with appropriate compounding 
+                    frequencies for each investment type.</p>
+                </div>
+            </div>
+
+            <!-- Results Card -->
+            <div class="calculator-card results-card">
+                <div class="results-header">
+                    <h2><i class="fas fa-chart-bar"></i> Returns Comparison</h2>
+                </div>
+
+                <!-- Chart -->
                 <div class="chart-container">
                     <canvas id="returnsChart"></canvas>
                 </div>
-                
-                <div class="results-table">
-                    <h2>Comparison Results</h2>
-                    <table>
+
+                <!-- Results Table -->
+                <div class="results-table-container">
+                    <table class="results-table" id="results-table">
                         <thead>
                             <tr>
-                                <th>Investment Option</th>
-                                <th>Rate (%)</th>
-                                <th>Final Amount</th>
-                                <th>Returns</th>
-                                <th>ROI</th>
+                                <th>Investment</th>
+                                <th>Rate (%) </th>
+                                <th>Final Amount (Kshs)</th>
+                                <th>Returns (Kshs)</th>
+                                <th>ROI (%) </th>
                                 <th>Risk</th>
                             </tr>
                         </thead>
                         <tbody id="results-body">
-                            <!-- Results will be populated here -->
+                            <tr class="placeholder">
+                                <td colspan="6" style="text-align: center; padding: 30px; color: var(--text-light);">
+                                    <i class="fas fa-calculator" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                                    Enter investment details and click "Calculate"
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="assets-section">
+        <!-- Investment Options Section -->
+        <section class="assets-section">
+            <div class="section-header">
                 <h2>Available Investment Options</h2>
-                <div class="assets-grid" id="assets-grid">
-                    <!-- Assets will be loaded here -->
-                </div>
-            </section>
-        </main>
+                <p>Compare key metrics across different investment vehicles available in Kenya</p>
+            </div>
 
-        <footer>
-            <p>Note: Rates are indicative and subject to change. Past performance is not indicative of future results.</p>
+            <div class="assets-grid" id="assets-grid">
+                <!-- Assets will be loaded here -->
+            </div>
+
+            <div class="info-box">
+                <h3>Important Information</h3>
+                <p>
+                    <strong>Disclaimer:</strong> The returns shown are based on current market rates and 
+                    historical averages. Actual returns may vary based on market conditions. 
+                    Always consult with a qualified financial advisor before making investment decisions.
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>
+                <strong>PesaCompare.ke</strong> • 
+                Data updated: <span id="current-date"></span> • 
+                For educational purposes only
+            </p>
+            <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8;">
+                This tool compares compound interest calculations with appropriate compounding frequencies.
+            </p>
         </footer>
     </div>
 
     <script>
+        // Initialize variables
         let chart = null;
         
-        // Load assets on page load
+        // Set current date in footer
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Load assets and calculate on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadAssets();
             calculateReturns();
         });
-        
-        // Update years display
-        document.getElementById('years').addEventListener('input', function() {
-            document.getElementById('years-display').textContent = this.value;
+
+        // Update range slider display
+        const yearsSlider = document.getElementById('years');
+        yearsSlider.addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('years-display').textContent = 
+                value === '1' ? '1 year' : `${value} years`;
+            
+            // Update slider gradient
+            const max = this.max;
+            const percent = (value / max) * 100;
+            this.style.background = `linear-gradient(90deg, var(--primary-color) 0%, #ddd ${percent}%)`;
         });
-        
+
+        // Initialize slider gradient
+        yearsSlider.style.background = `linear-gradient(90deg, var(--primary-color) 0%, #ddd ${(yearsSlider.value / yearsSlider.max) * 100}%)`;
+
+        // Load investment options
         async function loadAssets() {
             try {
                 const response = await fetch('/api/assets');
@@ -89,31 +267,78 @@
                 displayAssets(assets);
             } catch (error) {
                 console.error('Error loading assets:', error);
+                showError('assets-grid', 'Unable to load investment options. Please refresh the page.');
             }
         }
-        
+
         function displayAssets(assets) {
             const grid = document.getElementById('assets-grid');
             grid.innerHTML = assets.map(asset => `
                 <div class="asset-card">
                     <div class="asset-header">
-                        <h3>${asset.name}</h3>
-                        <span class="rate-badge">${asset.rate}%</span>
+                        <div class="asset-title">${asset.name}</div>
+                        <div class="asset-rate">${asset.rate}%</div>
                     </div>
+                    
                     <div class="asset-details">
-                        <p><strong>Risk:</strong> <span class="risk-${asset.risk.toLowerCase()}">${asset.risk}</span></p>
-                        <p><strong>Liquidity:</strong> ${asset.liquidity}</p>
-                        <p><strong>Min Investment:</strong> KES ${asset.min_investment.toLocaleString()}</p>
-                        <p class="description">${asset.description}</p>
+                        <div class="detail-row">
+                            <span class="detail-label">Type</span>
+                            <span class="detail-value">${formatAssetType(asset.type)}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Risk Level</span>
+                            <span class="detail-value">
+                                <span class="risk-indicator risk-${asset.risk.toLowerCase()}">
+                                    ${asset.risk}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Liquidity</span>
+                            <span class="detail-value">${asset.liquidity}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Minimum</span>
+                            <span class="detail-value">Kshs ${formatCurrency(asset.min_investment)}</span>
+                        </div>
                     </div>
+                    
+                    <p class="asset-description">${asset.description}</p>
                 </div>
             `).join('');
         }
-        
+
+        // Format asset type for display
+        function formatAssetType(type) {
+            const types = {
+                'sacco': 'SACCO',
+                'mmf': 'Money Market Fund',
+                'bank_interest': 'Bank Deposit',
+                'treasury_bills': 'Treasury Bill',
+                'bonds': 'Infrastructure Bond',
+                'rental': 'Rental Property',
+                'land': 'Land Investment'
+            };
+            return types[type] || type;
+        }
+
+        // Calculate returns
         async function calculateReturns() {
-            const principal = document.getElementById('principal').value;
-            const years = document.getElementById('years').value;
+            const principal = parseFloat(document.getElementById('principal').value);
+            const years = parseInt(document.getElementById('years').value);
             
+            // Validate input
+            if (isNaN(principal) || principal < 1000) {
+                alert('Please enter a valid investment amount (minimum Kshs 1,000)');
+                return;
+            }
+
+            // Show loading state
+            const calculateBtn = document.querySelector('.calculate-btn');
+            const originalText = calculateBtn.innerHTML;
+            calculateBtn.innerHTML = '<div class="loading"></div> Calculating...';
+            calculateBtn.disabled = true;
+
             try {
                 const response = await fetch('/api/calculate', {
                     method: 'POST',
@@ -121,94 +346,144 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        principal: parseFloat(principal),
-                        years: parseInt(years)
+                        principal: principal,
+                        years: years
                     })
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`Server error: ${response.status}`);
                 }
                 
                 const results = await response.json();
+                
+                // Remove placeholder row if it exists
+                const placeholder = document.querySelector('.placeholder');
+                if (placeholder) {
+                    placeholder.remove();
+                }
+                
                 displayResults(results);
                 updateChart(results);
                 
             } catch (error) {
                 console.error('Error calculating returns:', error);
-                alert('Error calculating returns. Please try again.');
+                showError('results-body', 'Unable to calculate returns. Please try again.');
+            } finally {
+                // Restore button state
+                calculateBtn.innerHTML = originalText;
+                calculateBtn.disabled = false;
             }
         }
-        
+
+        // Display results in table
         function displayResults(results) {
             const tbody = document.getElementById('results-body');
-            tbody.innerHTML = results.map(result => `
-                <tr>
-                    <td><strong>${result.name}</strong></td>
-                    <td>${result.rate}%</td>
-                    <td>KES ${result.final_amount.toLocaleString()}</td>
-                    <td>KES ${result.returns.toLocaleString()}</td>
-                    <td>${result.roi.toFixed(1)}%</td>
-                    <td><span class="risk-badge risk-${result.risk.toLowerCase()}">${result.risk}</span></td>
+            
+            // Sort by final amount (highest first)
+            results.sort((a, b) => b.final_amount - a.final_amount);
+            
+            tbody.innerHTML = results.map((result, index) => {
+                // Determine if this is the best performing investment
+                const isBest = index === 0;
+                
+                return `
+                <tr ${isBest ? 'style="background: linear-gradient(135deg, rgba(44, 140, 255, 0.05), rgba(52, 168, 83, 0.05));"' : ''}>
+                    <td>
+                        <strong>${result.name}</strong>
+                        ${isBest ? '<span style="margin-left: 8px; background: var(--secondary-color); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem;">Best Return</span>' : ''}
+                    </td>
+                    <td class="rate-cell">${result.rate}</td>
+                    <td class="amount-cell">${formatCurrency(result.final_amount)}</td>
+                    <td class="amount-cell">${formatCurrency(result.returns)}</td>
+                    <td class="roi-cell roi-positive">${result.roi.toFixed(1)}</td>
+                    <td>
+                        <span class="risk-indicator risk-${result.risk.toLowerCase()}">
+                            ${result.risk}
+                        </span>
+                    </td>
                 </tr>
-            `).join('');
+                `;
+            }).join('');
         }
-        
+
+        // Update chart
         function updateChart(results) {
             const ctx = document.getElementById('returnsChart').getContext('2d');
+            
+            // Sort results for better chart display
+            results.sort((a, b) => a.final_amount - b.final_amount);
             
             if (chart) {
                 chart.destroy();
             }
             
-            // Sort results by final amount
-            results.sort((a, b) => b.final_amount - a.final_amount);
+            // Color palette
+            const colors = [
+                'rgba(52, 168, 83, 0.7)',
+                'rgba(66, 133, 244, 0.7)',
+                'rgba(234, 67, 53, 0.7)',
+                'rgba(251, 188, 5, 0.7)',
+                'rgba(171, 71, 188, 0.7)',
+                'rgba(66, 133, 244, 0.7)',
+                'rgba(52, 168, 83, 0.7)'
+            ];
             
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: results.map(r => r.name),
                     datasets: [{
-                        label: 'Final Amount (KES)',
+                        label: 'Final Amount (Kshs)',
                         data: results.map(r => r.final_amount),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)',
-                            'rgba(153, 102, 255, 0.7)',
-                            'rgba(255, 159, 64, 0.7)',
-                            'rgba(201, 203, 207, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 206, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(153, 102, 255)',
-                            'rgb(255, 159, 64)',
-                            'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1
+                        backgroundColor: colors,
+                        borderColor: colors.map(color => color.replace('0.7', '1')),
+                        borderWidth: 1,
+                        borderRadius: 6,
+                        barPercentage: 0.7,
                     }]
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
-                        title: {
-                            display: true,
-                            text: 'Investment Returns Comparison'
-                        },
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Kshs ${formatCurrency(context.raw)}`;
+                                }
+                            }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
                             ticks: {
                                 callback: function(value) {
-                                    return 'KES ' + value.toLocaleString();
+                                    if (value >= 1000000) {
+                                        return 'Kshs ' + (value / 1000000).toFixed(1) + 'M';
+                                    } else if (value >= 1000) {
+                                        return 'Kshs ' + (value / 1000).toFixed(0) + 'K';
+                                    }
+                                    return 'Kshs ' + value;
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
                                 }
                             }
                         }
@@ -216,6 +491,36 @@
                 }
             });
         }
+
+        // Helper function to format currency
+        function formatCurrency(amount) {
+            if (amount >= 1000000) {
+                return (amount / 1000000).toFixed(1) + 'M';
+            } else if (amount >= 1000) {
+                return (amount / 1000).toFixed(0) + 'K';
+            }
+            return amount.toLocaleString();
+        }
+
+        // Helper function to show error
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #ea4335;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <p>${message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Handle window resize for chart
+        window.addEventListener('resize', function() {
+            if (chart) {
+                chart.resize();
+            }
+        });
     </script>
 </body>
 </html>
